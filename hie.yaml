@@ -1,0 +1,6 @@
+cradle:
+  cabal:
+    - path: "src"
+      component: "uplc-arithmetization:lib:uplc-arithmetization"
+    - path: "app"
+      component: "uplc-arithmetization:exe:uplc-arithmetization"
