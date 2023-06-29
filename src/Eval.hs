@@ -9,6 +9,7 @@
 
 module Eval where
 
+import           Data.Bool                (bool)
 import           PlutusTx.Builtins
 import           Prelude
 
@@ -44,6 +45,22 @@ eval 8 [vX, vY]
     | ConV (CInt x) <- vX, ConV (CInt y) <- vY = ConV (CBool $ toPolyData () $ lessThanInteger x y)
 eval 9 [vX, vY]
     | ConV (CInt x) <- vX, ConV (CInt y) <- vY = ConV (CBool $ toPolyData () $ lessThanEqualsInteger x y)
--- eval 10 [vX, vY]
---     | ConV (CBytes x) <- vX, ConV (CBytes y) <- vY = ConV (CBytes $ toPolyData () $ appendByteString x y)
+eval 11 [vX, vY]
+    | ConV (CInt x) <- vX, ConV bs@(CBytes _) <- vY = ConV (CBytes (x, bs))
+eval 15 [vX, vY]
+    | ConV bs1@(CBytes _) <- vX, ConV bs2@(CBytes _) <- vY = ConV (CBool $ toPolyData () $ bs1 == bs2)
+eval 26 [vX, vY, vZ]
+    | ConV (CBool b) <- vX = bool vZ vY (b == 1)
+eval 29 [vX]
+    | ConV (CPair (c1, _)) <- vX = ConV c1
+eval 30 [vX]
+    | ConV (CPair (_, c2)) <- vX = ConV c2
+eval 32 [vX, vY]
+    | ConV x <- vX, ConV y@(CList _) <- vY = ConV (CList (x, y))
+eval 33 [vX]
+    | ConV (CList (x, _)) <- vX = ConV x
+eval 34 [vX]
+    | ConV (CList (_, xs)) <- vX = ConV xs
+eval 35 [vX]
+    | ConV (CList (x, xs)) <- vX = ConV (CBool $ toPolyData () $ x == CInt (-1) && xs == CInt (-1))
 eval _ _ = ErrorV
