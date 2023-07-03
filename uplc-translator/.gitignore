@@ -1,0 +1,8 @@
+lexer.cc
+parser.cc
+parser.hh
+stack.hh
+translator
+program.out
+consts.json
+terms.json

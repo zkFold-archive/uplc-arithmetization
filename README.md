@@ -16,3 +16,21 @@ cd test
 ./run.sh
 ```
 to run the CEK machine emulator on these input files.
+
+# Translator
+
+A tool for translations from UPLC to triplets. Generate `constants.json` and `terms.json` files
+
+## How to use
+
+```bash
+cd uplc-translator
+make translator
+./translator /path/to/uplc_code.uplc consts.json terms.json
+```
+
+Binary file "translator" is generated.
+
+Takes program from `/path/to/uplc_code.uplc`.
+
+Output is in `consts.json` and `terms.json`.
