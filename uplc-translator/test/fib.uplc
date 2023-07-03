@@ -1,9 +1,8 @@
 (program
   2.0.0
-  (lam inp 
     [ [ (builtin equalsInteger) 
     
-        [ (force (force (builtin sndPair))) inp ] ]
+        (con integer 55) ]
     
         [ [ [ [   (lam fn [fn fn])
                 (lam g (lam f0 (lam f1 (lam i
@@ -18,8 +17,7 @@
             ]
         (con integer 0) ] 
         (con integer 1) ] 
-        [ (force (force (builtin fstPair))) inp ] ] 
+        (con integer 10) ] 
 
     ]
-  )
 )
