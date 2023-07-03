@@ -19,7 +19,6 @@ import           CEKPolyData                 (cekPolyData)
 import           Types.Constant              (loadConstantArray)
 import           Types.PolyData              (PolyDataItem)
 import           Types.Term                  (loadTermArray)
-import Text.Pretty.Simple (pPrint)
 
 loadPolyDataUnsafe :: FilePath -> IO [(PolyDataItem, PolyDataItem, PolyDataItem)]
 loadPolyDataUnsafe path = fromMaybe [] . decode <$> readFile path
@@ -28,8 +27,6 @@ processProgram :: IO ()
 processProgram = do
     constants <- loadConstantArray <$> loadPolyDataUnsafe "constants.json"
     terms     <- loadTermArray constants <$> loadPolyDataUnsafe "terms.json"
-
-    pPrint terms
 
     let program = fst $ head terms
         witness = cekPolyData constants program

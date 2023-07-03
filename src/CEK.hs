@@ -45,9 +45,9 @@ cekStep (Return (ForceF : s) (BuiltinV b vs [i])) =
 cekStep (Return (ForceF : s) (BuiltinV b vs (i:is))) =
     (bool ErrorState (Return s (BuiltinV b vs is)) (i `elem` omega), 13)
 cekStep (Return (ApplyRightF (BuiltinV b vs [i]) : s) v) =
-    (bool ErrorState (evalCEK s b (v : vs)) (i `notElem` omega), 16)
+    (bool ErrorState (evalCEK s b (vs ++ [v])) (i `notElem` omega), 16)
 cekStep (Return (ApplyRightF (BuiltinV b vs (i:is)) : s) v) =
-    (bool ErrorState (Return s (BuiltinV b (v : vs) is)) (i `notElem` omega), 15)
+    (bool ErrorState (Return s (BuiltinV b (vs ++ [v]) is)) (i `notElem` omega), 15)
 cekStep _ = (ErrorState, 0)
 
 -------------------------- CEK Machine trace ------------------------------
