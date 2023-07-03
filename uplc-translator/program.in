@@ -1,0 +1,4 @@
+(program
+  2.0.0
+  ( lam x [ [ (builtin addInteger) [ (force (force (builtin fstPair))) x ] ] (con integer 42) ] )
+)
